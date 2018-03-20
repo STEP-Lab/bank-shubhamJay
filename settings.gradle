@@ -1,0 +1,4 @@
+rootProject.name = 'bankAssign'
+include 'application'
+include 'library'
+
