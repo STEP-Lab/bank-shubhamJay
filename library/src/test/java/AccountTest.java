@@ -23,7 +23,7 @@ public class AccountTest {
   }
 
   @Test(expected = InvalidAccNumException.class)
-  public void checkInvalidAccNum() throws InvalidAccNumException {
+  public void checkInvalidAccNumFormat() throws InvalidAccNumException {
     account = new Account("yogi","123",1000);
   }
 
@@ -52,13 +52,4 @@ public class AccountTest {
     account.withdraw(2000);
   }
 
-  @Test
-  public void checkCanDebit() {
-    assertTrue(account.canDebit(1000));
-  }
-
-  @Test
-  public void checkCanNotDebit() {
-    assertFalse(account.canDebit(2000));
-  }
 }

@@ -27,14 +27,14 @@ public class Account {
   }
 
   public int withdraw(int amount) throws LowBalanceException {
-    if (canDebit(amount)) {
+    if (!canDebit(amount)) {
       throw new LowBalanceException(amount);
     }
     balance -= amount;
     return balance;
   }
 
-  public boolean canDebit(int amount) {
+  private boolean canDebit(int amount) {
     return amount <= balance;
   }
 
