@@ -1,14 +1,14 @@
 package com.thoughtworks.step.bank;
 
+import java.util.ArrayList;
+
 public class Account {
   private final String name;
-  private final String accountNumber;
+  private final AccountNumber accountNumber;
   private int balance;
+  private Transactions transactions = new Transactions();
 
-  public Account(String name, String accountNumber, int balance) throws InvalidAccNumException{
-    if (!accountNumber.matches("^\\d{4}-\\d{4}$")){
-      throw new InvalidAccNumException(accountNumber);
-    }
+  public Account(String name, AccountNumber accountNumber, int balance) {
     this.name = name;
     this.accountNumber = accountNumber;
     this.balance = balance;
@@ -19,7 +19,7 @@ public class Account {
   }
 
   public String getAccountNumber() {
-    return accountNumber;
+    return accountNumber.getAccountNumber();
   }
 
   public String getName() {
@@ -30,6 +30,7 @@ public class Account {
     if (!canDebit(amount)) {
       throw new LowBalanceException(amount);
     }
+    transactions.addDebitTransaction(amount);
     balance -= amount;
     return balance;
   }
@@ -38,4 +39,13 @@ public class Account {
     return amount <= balance;
   }
 
+  public int credit(int amount) {
+    balance += amount;
+    transactions.addCreditTransaction(amount);
+    return balance;
+  }
+
+  public ArrayList<Transaction> getTransactions() {
+    return transactions.getTransactions();
+  }
 }
