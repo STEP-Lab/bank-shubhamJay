@@ -14,7 +14,7 @@ public class AccountTest {
 
   @Before
   public void setUp() throws InvalidAccNumException {
-    account = new Account("yogi",new AccountNumber("1234-1234"),1000);
+    account = new Account("yogi", AccountNumber.createAccountNumber("1234-1234"),1000);
   }
 
   @Test
@@ -33,28 +33,28 @@ public class AccountTest {
   }
 
   @Test
-  public void checkCashWithdraw() throws LowBalanceException {
-    assertThat(account.withdraw(500),is(500));
+  public void checkCashDebit() throws LowBalanceException {
+    assertThat(account.debit(500),is(500));
     assertThat(account.getBalance(),is(500.0));
   }
 
   @Test(expected = LowBalanceException.class)
-  public void checkInvalidCashWithdraw() throws LowBalanceException {
-    account.withdraw(2000);
+  public void checkInvalidCashDebit() throws LowBalanceException {
+    account.debit(2000);
   }
 
   @Test
   public void checkCredit() throws InvalidAccNumException {
-    Account account = new Account("yogi", new AccountNumber("1212-1212"), 1000);
+    Account account = new Account("yogi", AccountNumber.createAccountNumber("1212-1212"), 1000);
     assertThat(account.credit(3000),is(4000));
     assertThat(account.getTransactions(),hasItem(new CreditTransaction(3000)));
   }
 
   @Test
   public void checkTransactions() throws LowBalanceException, InvalidAccNumException {
-    Account account = new Account("yogi", new AccountNumber("1212-1212"), 1000);
+    Account account = new Account("yogi", AccountNumber.createAccountNumber("1212-1212"), 1000);
     account.credit(3000);
-    account.withdraw(2000);
+    account.debit(2000);
     assertThat(account.getTransactions(),hasItems(new CreditTransaction(3000),new DebitTransaction(2000)));
   }
 }

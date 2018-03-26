@@ -19,6 +19,6 @@ public class Transactions {
   }
 
   public void addCreditTransaction(int amount) {
-    transactions.add(new CreditTransaction(3000));
+    transactions.add(new CreditTransaction(amount));
   }
 }

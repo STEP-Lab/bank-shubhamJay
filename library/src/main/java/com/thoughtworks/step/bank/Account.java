@@ -26,7 +26,7 @@ public class Account {
     return name;
   }
 
-  public int withdraw(int amount) throws LowBalanceException {
+  public int debit(int amount) throws LowBalanceException {
     if (!canDebit(amount)) {
       throw new LowBalanceException(amount);
     }

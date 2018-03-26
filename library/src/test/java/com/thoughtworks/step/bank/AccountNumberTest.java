@@ -7,11 +7,11 @@ public class AccountNumberTest {
 
   @Test
   public void checkAccNumFormat() throws InvalidAccNumException {
-    account = new Account("yogi",new AccountNumber("1234-1234"),1000);
+    account = new Account("yogi", AccountNumber.createAccountNumber("1234-1234"),1000);
   }
 
   @Test(expected = InvalidAccNumException.class)
   public void checkInvalidAccNumFormat() throws InvalidAccNumException {
-    account = new Account("yogi",new AccountNumber("123"),1000);
+    account = new Account("yogi", AccountNumber.createAccountNumber("123"),1000);
   }
 }
