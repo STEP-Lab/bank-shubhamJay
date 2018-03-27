@@ -3,7 +3,7 @@ package com.thoughtworks.step.bank;
 import java.util.Date;
 import java.util.Objects;
 
-abstract public class   Transaction {
+abstract public class Transaction {
   private final int amount;
   private final Date date;
 
@@ -27,5 +27,13 @@ abstract public class   Transaction {
     Transaction that = (Transaction) o;
     return amount == that.amount &&
             Objects.equals(date.toString(), that.date.toString());
+  }
+
+  @Override
+  public String toString() {
+    return "Transaction{" +
+            "amount=" + amount +
+            ", date=" + date +
+            '}';
   }
 }

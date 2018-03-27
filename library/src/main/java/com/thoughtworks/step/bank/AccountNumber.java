@@ -8,7 +8,7 @@ public class AccountNumber {
   }
 
   public static AccountNumber createAccountNumber(String accountNumber) throws InvalidAccNumException {
-    if (!accountNumber.matches("^\\d{4}-\\d{4}$")){
+    if (!accountNumber.matches("^\\d{4}-\\d{4}$")) {
       throw new InvalidAccNumException(accountNumber);
     }
     return new AccountNumber(accountNumber);

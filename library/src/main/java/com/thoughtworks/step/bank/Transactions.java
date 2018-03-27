@@ -21,4 +21,28 @@ public class Transactions {
   public void addCreditTransaction(int amount) {
     transactions.add(new CreditTransaction(amount));
   }
+
+  public Transactions getAllDebitTransactions() {
+    Transactions result = new Transactions();
+    transactions.forEach((Transaction transaction) -> {
+      if (transaction instanceof DebitTransaction) {
+        result.addTransaction(transaction);
+      }
+    });
+    return result;
+  }
+
+  private void addTransaction(Transaction transaction) {
+    transactions.add(transaction);
+  }
+
+  public Transactions getAllCreditTransaction() {
+    Transactions result = new Transactions();
+    transactions.forEach((Transaction transaction) -> {
+      if (transaction instanceof CreditTransaction) {
+        result.addTransaction(transaction);
+      }
+    });
+    return result;
+  }
 }

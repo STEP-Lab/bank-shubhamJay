@@ -9,6 +9,6 @@ public class DebitTransaction extends Transaction {
   }
 
   public DebitTransaction(int amount) {
-    this(amount,new Date());
+    this(amount, new Date());
   }
 }
