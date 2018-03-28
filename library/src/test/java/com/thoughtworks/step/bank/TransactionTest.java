@@ -1,21 +1,30 @@
 package com.thoughtworks.step.bank;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Date;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class TransactionTest {
+
+  private DebitTransaction debitTransaction;
+
+  @Before
+  public void setUp() throws Exception {
+    debitTransaction = new DebitTransaction(3000, new Date());
+  }
+
   @Test
   public void checkGetBalance() {
-    DebitTransaction debitTransaction = new DebitTransaction(3000);
     assertThat(debitTransaction.getAmount(), is(3000));
   }
 
+  @Test
   public void checkGetDate() {
-    DebitTransaction debitTransaction = new DebitTransaction(3000, new Date());
     assertThat(debitTransaction.getDate().toString(), is(new Date().toString()));
   }
+
 }

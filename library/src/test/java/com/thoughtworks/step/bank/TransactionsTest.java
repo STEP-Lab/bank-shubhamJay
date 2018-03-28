@@ -48,4 +48,26 @@ public class TransactionsTest {
     assertThat(allCreditTransaction.getTransactions(), hasItems(new CreditTransaction(200), new CreditTransaction(300)));
     assertThat(allCreditTransaction.getTransactions(), not(hasItem(new DebitTransaction(400))));
   }
+
+  @Test
+  public void checkGetTransactionsAbove() {
+    transactions.addCreditTransaction(200);
+    transactions.addCreditTransaction(400);
+    transactions.addCreditTransaction(600);
+    transactions.addDebitTransaction(700);
+    Transactions transactionsAbove = transactions.getTransactionsAbove(500);
+    assertThat(transactionsAbove.getTransactions(), hasItems(new DebitTransaction(700), new CreditTransaction(600)));
+    assertThat(transactionsAbove.getTransactions(), not(hasItems(new CreditTransaction(200), new CreditTransaction(400))));
+  }
+
+  @Test
+  public void checkTransactionBelow() {
+    transactions.addCreditTransaction(200);
+    transactions.addCreditTransaction(400);
+    transactions.addCreditTransaction(600);
+    transactions.addDebitTransaction(700);
+    Transactions transactionsBelow = transactions.getTransactionsBelow(500);
+    assertThat(transactionsBelow.getTransactions(), hasItems(new CreditTransaction(200), new CreditTransaction(400)));
+    assertThat(transactionsBelow.getTransactions(), not(hasItems(new DebitTransaction(700), new CreditTransaction(600))));
+  }
 }

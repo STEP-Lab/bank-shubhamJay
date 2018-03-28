@@ -2,16 +2,23 @@ package com.thoughtworks.step.bank;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 public class AccountNumberTest {
-  private Account account;
 
   @Test
   public void checkAccNumFormat() throws InvalidAccNumException {
-    account = new Account("yogi", AccountNumber.createAccountNumber("1234-1234"),1000);
+    AccountNumber.createAccountNumber("1234-1234");
   }
 
   @Test(expected = InvalidAccNumException.class)
   public void checkInvalidAccNumFormat() throws InvalidAccNumException {
-    account = new Account("yogi", AccountNumber.createAccountNumber("123"),1000);
+    AccountNumber.createAccountNumber("123");
+  }
+
+  @Test
+  public void checkGetAccountNumber() throws InvalidAccNumException {
+    AccountNumber accountNum = AccountNumber.createAccountNumber("1234-1237");
+    assertEquals(accountNum.getAccountNumber(),"1234-1237");
   }
 }

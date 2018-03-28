@@ -1,6 +1,7 @@
 package com.thoughtworks.step.bank;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Transactions {
 
@@ -22,6 +23,10 @@ public class Transactions {
     transactions.add(new CreditTransaction(amount));
   }
 
+  private void addTransaction(Transaction transaction) {
+    transactions.add(transaction);
+  }
+
   public Transactions getAllDebitTransactions() {
     Transactions result = new Transactions();
     transactions.forEach((Transaction transaction) -> {
@@ -32,9 +37,6 @@ public class Transactions {
     return result;
   }
 
-  private void addTransaction(Transaction transaction) {
-    transactions.add(transaction);
-  }
 
   public Transactions getAllCreditTransaction() {
     Transactions result = new Transactions();
@@ -43,6 +45,28 @@ public class Transactions {
         result.addTransaction(transaction);
       }
     });
+    return result;
+  }
+
+  public Transactions getTransactionsAbove(int amount){
+    Transactions result = new Transactions();
+    for (Transaction transaction :
+         transactions) {
+        if (transaction.getAmount() > amount ){
+          result.addTransaction(transaction);
+        }
+    }
+    return result;
+  }
+
+  public Transactions getTransactionsBelow(int amount) {
+    Transactions result = new Transactions();
+    for (Transaction transaction :
+            transactions) {
+      if (transaction.getAmount() < amount ){
+        result.addTransaction(transaction);
+      }
+    }
     return result;
   }
 }
